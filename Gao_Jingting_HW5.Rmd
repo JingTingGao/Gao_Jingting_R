@@ -1,0 +1,38 @@
+---
+title: "Gao_JingTing_HW5"
+author: "Jingting Gao"
+date: "10/6/2016"
+output: html_document
+---
+
+```{r}
+library('ggplot2')
+data("diamonds")
+
+#1. Print to the console all methods and attributes associates with a dataframe. Write code to determine the number of columns in a dataframe
+class(diamonds)#get the class of diamonds
+methods(class=class(diamonds)[3])#get all methods and the class is 3 by previous
+attributes(diamonds)#get all attributes.
+ncol(diamonds)#get the number of columns
+
+#2. Write code to determine how many rows are in a dataframe
+nrow(diamonds)#get the number of rows
+
+#3. Write code to extract the column names from a dataframe and print the names of the columns (one per line) to the console.
+cat(colnames(diamonds),sep="\n")#get the columns name and print them one per line
+
+#4. Write code to determine the type of each column (numeric, factor, logical, etc.). Print the type of each column to the console.
+sapply(diamonds,class)#classify the type of each column
+
+#5. Write code that will loop through any dataframe and calculate the mean of every numeric column. Label the output with the name of the column.
+sapply(diamonds[sapply(diamonds,is.numeric)],mean)#get the numeric columns and compute the mean of them
+
+#6. Write code that will loop through any dataframe and create a frequency table for every factor column. Label the output with the name of the column.
+summary(diamonds[sapply(diamonds,is.factor)])#get the factor columns and summarize the frequency of each factor  
+
+#7. Write code that will loop through any dataframe and determine the number of rows containing NA (missing value) in each column and the percentage of rows containing an NA in any of the columns. HINT: In a single row, zero or more columns may contain an NA. For the percentage of rows containing NA in any column, do not double count NA in rows that contain more than one column with an NA. Print the results to the console.
+apply(sapply(diamonds,is.na), 2, sum) #extract the rows containing NA and sum them up to get the number of rows in each column
+sum(rowSums(is.na(diamonds))>0)/nrow(diamonds)#get the percentage of rows containing an NA in any of the columns
+
+```
+
