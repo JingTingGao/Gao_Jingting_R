@@ -4,7 +4,7 @@ author: "Jingting Gao"
 date: "10/6/2016"
 output: html_document
 ---
-
+#Overall comments: Good exercise! Your codes are clear and efficeint and your explanations really showed your understanding 
 ```{r}
 library('ggplot2')
 data("diamonds")
