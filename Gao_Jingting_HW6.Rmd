@@ -4,6 +4,8 @@ author: "Jingting Gao"
 date: "10/13/2016"
 output: html_document
 ---
+#Overall Comments: Good exercise! You got the algorithm of ggplot so next step for you should improve the format and make your code more readable.
+
 ```{r}
 library('ggplot2')
 library(reshape2)
@@ -32,12 +34,17 @@ histy+geom_histogram(bins=180)+ggtitle("Y Histogram")+xlim(3,10)#plot the y hist
 histz<-ggplot(diamonds,aes(z))#create a variable of z histogram,
 histz+geom_histogram(bins=60)+ggtitle("Z Histogram")+xlim(2,6)#plot the z histogram, name it as Z Histogram, read the distribution, and remove the outliers.
 
+#Comments: I do see your code works for this problem. But I just want to point out that you actually have better way to do this. One way should be filter out all the numeric variables and then use one loop draw the histograms for each. This way should be more clear and readable.
+
 #2. Create a simple scatter plot of Weight (“Carat”) and Price using Color (the “Color” column in the diamonds dataframe) as a facet. This might the precursor for developing a model to predict price given some characteristic like weight. Notice that the relationship is non-linear. If we wanted to build a linear model, this would violate one of the assumptions.
 
 scatplot <- ggplot(diamonds, aes(x=carat, y=(price), colour=color))#create a variable of scatter plot, set carat to x axis, price to y axis, and color to colour
 scatplot <- scatplot + geom_point(size=0.8) + ggtitle("Diamonds - Weight to Price by Color") + xlab("Weight")#plot the data on a scatter plot, titling the graph, x-axis, y-axis, and key as appropriate(reschedual the size of the points)
 scatplot <- scatplot + ylab("Price") + labs(colour = "factor(color)")
 print(scatplot)#print the final scatter plot
+
+#Comments: This code works in this problem and I do see your understanding in the layer ploting thought in ggplot. But I suggest one better format that you can refer to 
+ggplot(diamonds,aes(carat,price))+geom_point(aes(color=factor(color)))+labs(title="Diamonds-Weight to Price by Color",x='Weight',y='Price')
 
 #3. All Groups: Let’s remove the non-linearity and replot. Think about transforming both price and weight. Given that we are working with dollars (Price); the first transformation we might try is the natural log. Add the transformed columns to the dataframe and replot.
 
